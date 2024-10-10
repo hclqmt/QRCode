@@ -1,0 +1,48 @@
+物流:
+
+箱单主表:M_PACKAGES ,明细表:M_PACKAGE_ITEMS
+
+箱单主表扩展表:LOGISTICS_PACKAGES_EXTEND
+
+发货通知表:LOGISTICS_SHIPPING_NOTE
+
+装车发运表:LOGISTICS_LOADING_LIST
+
+仓储:
+入库
+WMS_RECEIVE_BATCH:按合同入库主表扩展表	
+m_matl_recv_rpts     	入库主表              	mrrType用来区分入库方式
+m_matl_recv_rpt_nls   	入库主表的扩展表     mrr_id主表ID   与主表一对一关系
+m_inv_receipts         	入库子表               	mrr_id 主表ID	
+
+	
+
+wms_sins_obi_headers	现场检验主表
+wms_sins_obi_line_items 	现场检验子表           obiId是关联主表
+wms_sins_obi_open_box	现场检验子表详情（按台检验时出现的开箱检验记录）
+wms_sins_obi_check_items	检验内容明细
+
+出库:
+m_matl_issue_rpts 出库主表
+m_matl_issue_rpt_nls 扩展表
+m_inv_issues 子表
+
+库存表:m_inv_items
+
+预留单主表:M_FA_HEADERS 
+预留明细表:M_INV_POS_RES
+
+
+退库主表:m_matl_inv_rtis，子表：m_matl_inv_rti_dets
+移库主表:m_matl_transfer_rpts ，子表：m_inv_transfers
+盘库主表：m_phys_inv_cnt_shts，子表：m_phys_inv_cnts
+
+
+WMS_WAREHOUSE 仓库表
+
+alter table tableName disable constraint POH_USR_BUYER_OF_FK
+update M_SYS.M_PO_HEADERS set buyer ='ZHANGQIONGYI' where poh_id ='5500'
+zhangqiongyi@wison.com
+CNC1-E2-VXPOR-00-S102-2000-001
+
+发货通知-箱单-1234
