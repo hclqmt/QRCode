@@ -2,6 +2,7 @@ package com.example.springdataredis.utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -78,7 +79,8 @@ public class QRCodeUtils {
      * @param logoPath 完整的logo路径，可以为：null
      * @return
      */
-    public static boolean CreateQRCode(String content, String savePath, int version, String logoPath,char errorCorrect,char encodeMode){
+    public static ByteArrayOutputStream CreateQRCode(String content,int version, String logoPath,char errorCorrect,char encodeMode){
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         // 创建生成二维码的对象
         Qrcode qrcode = new Qrcode();
         // 设置二维码的容错能力等级
@@ -142,27 +144,12 @@ public class QRCodeUtils {
             // 结束内存图片
             bufferedImage.flush();
             // 保存生成的二维码图片
-            ImageIO.write(bufferedImage, "png", new File(savePath));
-
-            return true;
+            ImageIO.write(bufferedImage, "png", buffer);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return false;
+        return buffer;
     }
 
-    public static void main(String[] args) {
-        String content = "{\"data\":{\"relnNumber\":\"HYS-FYD-230510-0001\",\"projId\":\"HYS\",\"poName\":\"海阳3/4号机组MP10卧式单级离心泵设备采购合同\",\"transportMethodDesc\":\"国内陆运\",\"companyName\":\"沈阳鼓风机集团核电泵业有限公司（原沈阳透平机械股份有限公司）\",\"relnId\":7839,\"poNumber\":\"HYS-MP10-G8-0108\"},\"type\":\"ITEM_RETURN_FAYUNDAN\"}";
-        content = "{\"data\":{\"relnNumber\":\"HYS-FYD3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵3/4号机组主泵-170224-01\",\"projId\":\"HYS\",\"poName\":\"海阳核电3/4号机组主泵装卸工具订货合同\",\"companyName\":\"中联重科股份有限公司\",\"relnId\":5277,\"poNumber\":\"HYS-MH17-G8-0014\"},\"type\":\"ITEM_RETURN_FAYUNDAN\"}";
-        String savePath = "C:\\Users\\huangchengliu\\Desktop\\qrcode2.png";
-        int version = 15;
-        String logoPath = null;
-        boolean result = CreateQRCode(content, savePath, version, logoPath,ErrorCorrect.H,EncodeMode.B);
-        if (result){
-            System.out.println("\n二维码图片生成成功！");
-        }else{
-            System.out.println("\n二维码图片生成失败！");
-        }
-    }
 }
