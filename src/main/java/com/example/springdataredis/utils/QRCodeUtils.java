@@ -1,11 +1,12 @@
 package com.example.springdataredis.utils;
 
-import com.swetake.util.Qrcode;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
+import javax.imageio.ImageIO;
+
+import com.swetake.util.Qrcode;
 
 /**
  * 二维码工具类
@@ -77,13 +78,13 @@ public class QRCodeUtils {
      * @param logoPath 完整的logo路径，可以为：null
      * @return
      */
-    public static boolean CreateQRCode(String content, String savePath, int version, String logoPath){
+    public static boolean CreateQRCode(String content, String savePath, int version, String logoPath,char errorCorrect,char encodeMode){
         // 创建生成二维码的对象
         Qrcode qrcode = new Qrcode();
         // 设置二维码的容错能力等级
-        qrcode.setQrcodeErrorCorrect(ErrorCorrect.L);
+        qrcode.setQrcodeErrorCorrect(errorCorrect);
         // N代表的是数字，A代表的是a-z,B代表的是其他字符
-        qrcode.setQrcodeEncodeMode(EncodeMode.B);
+        qrcode.setQrcodeEncodeMode(encodeMode);
         // 版本
         qrcode.setQrcodeVersion(version);
 
@@ -157,7 +158,7 @@ public class QRCodeUtils {
         String savePath = "C:\\Users\\huangchengliu\\Desktop\\qrcode2.png";
         int version = 15;
         String logoPath = null;
-        boolean result = CreateQRCode(content, savePath, version, logoPath);
+        boolean result = CreateQRCode(content, savePath, version, logoPath,ErrorCorrect.H,EncodeMode.B);
         if (result){
             System.out.println("\n二维码图片生成成功！");
         }else{
